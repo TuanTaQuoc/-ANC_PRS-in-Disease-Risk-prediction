@@ -17,3 +17,7 @@ Quy trình xử lý và trích xuất dữ liệu kiểu hình (Phenotype)
   + Gộp cả 4 file đã lọc thành 1 file duy nhất , đảm bảo thông tin về số lượng cột hay tên các cột của cả 4 file đều là như nhau để thuận tiện cho việc gộp.   Giả sử ta thu được file ex sau khi gộp
   + Thực hiện sort RID trong file ex , nếu có các hàng có RID trùng nhau , sắp xếp theo Examdate tăng dần.
   + Với từng giá trị RID , giữ lại hàng có giá trị Phenotype lớn nhất trong quá trình khám của bệnh nhân đó . Nếu như tồn tại nhiều hàng có giá trị lớn nhất bằng nhau , giữ lại hàng có Examdate gần nhất.  => ADNI_Phenotype.csv
+
+
+
+

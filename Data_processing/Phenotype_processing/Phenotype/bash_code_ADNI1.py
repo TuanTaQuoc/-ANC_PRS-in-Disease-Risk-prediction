@@ -1,4 +1,4 @@
-/// ADNI1
+
 
 import pandas as pd
 
@@ -29,25 +29,11 @@ processed_df.to_csv(output_file, index=False)
 
 # Show the first 5 rows of the result
 # print(processed_df.head())
-
-
-
-//////////////////////////////////
-
-
-
-import pandas as pd
-
 # Load the previously processed data
 df = pd.read_csv('processed_phenotype_data.csv')
 
 # Convert EXAMDATE to datetime for correct sorting
 df['EXAMDATE_DT'] = pd.to_datetime(df['EXAMDATE'])
-
-
-//////////////////////////////
-
-
 
 # Sorting:
 # 1. RID: group by patient

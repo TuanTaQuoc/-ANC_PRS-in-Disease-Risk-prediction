@@ -9,11 +9,6 @@ df_sorted = df.sort_values(by='RID')
 # Save the sorted dataframe to a new CSV file
 df_sorted.to_csv('sorted_DXSUM_PDXCONV_ADNI2.csv', index=False)
 
-////
-
-
-import pandas as pd
-
 # Load the data
 df = pd.read_csv('DXSUM_PDXCONV_ADNI2.csv')
 
@@ -31,12 +26,6 @@ df_sorted_final = df_filtered.sort_values(by=['RID', 'EXAMDATE'])
 # Save to a new CSV file
 output_file = 'processed_ADNI2_data.csv'
 df_sorted_final.to_csv(output_file, index=False)
-
-
-///////
-
-
-import pandas as pd
 
 # Load the previously processed data
 df = pd.read_csv('processed_ADNI2_data.csv')
