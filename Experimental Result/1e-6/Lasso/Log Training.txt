@@ -1,0 +1,49 @@
+ ==========================================
+BƯỚC 1: TIỀN XỬ LÝ DỮ LIỆU (DATA PREPROCESSING)
+==========================================
+Kích thước tập X_train: (1000, 2807)
+Kích thước tập y_train: (1000,)
+
+==========================================
+BƯỚC 2 & 3: THIẾT LẬP PIPELINE VÀ LƯỚI SIÊU THAM SỐ
+==========================================
+Không gian tham số: {'log_reg__penalty': ['l1'], 'log_reg__C': [0.05, 0.1, 0.2, 0.5, 1, 2, 4]}
+
+==========================================
+BƯỚC 4: HUẤN LUYỆN VÀ TÌM KIẾM TỐI ƯU (GRID SEARCH)
+==========================================
+Fitting 5 folds for each of 7 candidates, totalling 35 fits
+
+=> Tham số tốt nhất: {'log_reg__C': 0.05, 'log_reg__penalty': 'l1'}
+=> ROC-AUC tốt nhất trên tập Validation (Cross-Val): 0.6797 ± 0.0458
+
+==========================================
+BƯỚC 6: ĐÁNH GIÁ TRÊN TẬP HOLD-OUT TEST
+==========================================
+Accuracy:  0.6494
+Precision: 0.6667
+Recall:    0.6444
+F1-Score:  0.6554
+ROC-AUC:   0.6795
+Confusion Matrix:
+[[55 29]
+ [32 58]]
+
+==========================================
+BƯỚC 7: KHAI THÁC ĐẶC TRƯNG (FEATURE IMPORTANCE)
+==========================================
+Top 10 Biến thể gen quan trọng nhất:
+Gene_Variant    Weight
+  rs429358_C  0.768477
+rs72924659_T -0.076178
+ rs2927438_A -0.075814
+ rs7912495_G  0.069277
+rs11257238_C  0.051796
+rs11853076_T -0.048327
+ rs6890748_A  0.046979
+ rs6014724_G -0.045915
+ rs7254892_A -0.045780
+ rs7154400_G  0.043578
+
+=> Đã xuất toàn bộ trọng số của các gen ra file: Feature_Importance_l1_c=0.05.csv
+'\nprint("\n==========================================")\nprint("BƯỚC 8: TRỰC QUAN HÓA KẾT QUẢ ĐỂ BÁO CÁO")\nprint("==========================================")\n\n# 8.1. Vẽ Confusion Matrix\nplt.figure(figsize=(6, 5))\nConfusionMatrixDisplay.from_predictions(\n    y_test, y_pred,\n    display_labels=[\'Control\', \'Case\'],\n    cmap=\'Blues\', values_format=\'d\'\n)\nplt.title(\'Confusion Matrix\')\nplt.savefig(\'plots/confusion_matrix_lr_baseline.pdf\', dpi=300, bbox_inches=\'tight\')\nplt.close()\n\n# 8.2. Vẽ ROC Curve\nplt.figure(figsize=(7, 6))\nRocCurveDisplay.from_estimator(best_pipeline, X_test_raw, y_test, color=\'darkorange\')\nplt.plot([0, 1], [0, 1], color=\'navy\', linestyle=\'--\')\nplt.title(f\'ROC Curve\')\nplt.savefig(\'plots/roc_curve_lr_baseline.png\', dpi=300, bbox_inches=\'tight\')\nplt.close()\n\n# 8.3. Vẽ biểu đồ phân phối xác suất (Risk Score Distribution) [Cực kỳ quan trọng cho PRS]\nplt.figure(figsize=(8, 6))\nsns.kdeplot(y_pred_proba[y_test == 0], label=\'Con…<'

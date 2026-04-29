@@ -187,7 +187,5 @@ Dự án học phần Đồ án Nghiên Cứu Cử Nhân , Sinh viên : Tạ Qu�
    - Dữ liệu PLINK gốc của bộ ADNI và tệp chứa thông tin lịch sử khám bệnh : https://drive.google.com/drive/folders/1g9As2FH68_v9ZZUJjJuTBBUSi6ppyOSF?hl=vi
    - Dữ liệu PLINK sau khi đã được phân pha và nội suy trên TOPMed Imputation Server (Bao gồm các file zip và mật khẩu giải nén) : https://drive.google.com/drive/folders/1ninX676Jm_CqybJJHAYFrqYR4hPu462S?hl=vi
    - Dữ liệu genotype sau khi đã qua quy trình hậu xử lý, được lưu trữ dưới định dạng PLINK : https://drive.google.com/drive/folders/1Sw2PJgTEwaDYb4ipe0D09Pwpc3nYeXGR?hl=vi 
-   **** Nếu có nhu cầu tải xuống các tập dữ liệu với mục đích nghiên cứu , vui lòng gửi request cho tôi ****
-
 
   
