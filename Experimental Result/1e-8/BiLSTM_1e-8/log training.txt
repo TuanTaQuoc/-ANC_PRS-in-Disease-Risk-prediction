@@ -1,0 +1,105 @@
+Device: cpu
+============================================================
+BƯỚC 1 — Đọc dữ liệu
+============================================================
+Train+Val: 1,000 mẫu | 1724 SNPs
+Test     : 174 mẫu
+Train+Val — case: 514, control: 486
+Test      — case: 90, control: 84
+
+============================================================
+BƯỚC 2 — Xây dựng SNP-Gene map
+============================================================
+Gene riêng biệt: 98 | NST: [1, 2, 4, 6, 7, 8, 11, 14, 15, 17, 19, 20]
+
+============================================================
+BƯỚC 3 — Encode 2D & Connectivity Matrix
+============================================================
+X_2d_tv shape: (1000, 1724, 2)  (N, num_snps, 2)
+  SNP có kết nối gene : 1724/1724
+  Tổng kết nối (edges): 1735
+Connectivity mask: (3448, 98)
+  n_gene           : 98
+  BiLSTM output dim: 784
+  NST có gene      : 12
+Tổng tham số    : 338,913
+
+============================================================
+BƯỚC 4 — 5-FOLD CROSS-VALIDATION (theo paper)
+============================================================
+
+  ── Fold 1/5 ──
+     Train: 800 | Val: 200
+  n_gene           : 98
+  BiLSTM output dim: 784
+  NST có gene      : 12
+    Fold  1 — stopped ep  44 | Best Val AUC: 0.6868
+
+  ── Fold 2/5 ──
+     Train: 800 | Val: 200
+  n_gene           : 98
+  BiLSTM output dim: 784
+  NST có gene      : 12
+    Fold  2 — stopped ep  22 | Best Val AUC: 0.7103
+
+  ── Fold 3/5 ──
+     Train: 800 | Val: 200
+  n_gene           : 98
+  BiLSTM output dim: 784
+  NST có gene      : 12
+    Fold  3 — stopped ep  49 | Best Val AUC: 0.6951
+
+  ── Fold 4/5 ──
+     Train: 800 | Val: 200
+  n_gene           : 98
+  BiLSTM output dim: 784
+  NST có gene      : 12
+    Fold  4 — stopped ep  31 | Best Val AUC: 0.6899
+
+  ── Fold 5/5 ──
+     Train: 800 | Val: 200
+  n_gene           : 98
+  BiLSTM output dim: 784
+  NST có gene      : 12
+    Fold  5 — stopped ep  13 | Best Val AUC: 0.7066
+
+============================================================
+KẾT QUẢ 5-FOLD CROSS-VALIDATION
+============================================================
+  Fold  1: AUC = 0.6868
+  Fold  2: AUC = 0.7103
+  Fold  3: AUC = 0.6951
+  Fold  4: AUC = 0.6899
+  Fold  5: AUC = 0.7066
+  ───────────────────────────────────
+  Mean AUC   : 0.6978 ± 0.0092
+  OOF AUC    : 0.6834  (tổng hợp out-of-fold)
+  Best fold  : 0.7103  | Worst: 0.6868
+
+============================================================
+BƯỚC 5 — RETRAIN TOÀN BỘ TRAIN+VAL & EVALUATE TEST
+============================================================
+  n_gene           : 98
+  BiLSTM output dim: 784
+  NST có gene      : 12
+  Fine-tuning trên toàn bộ train+val (10 epoch)...
+
+  CV Mean AUC (10-fold) : 0.6978 ± 0.0092
+  OOF AUC               : 0.6834
+  Test AUC (held-out)   : 0.6885
+
+  Classification Report (threshold=0.5):
+              precision    recall  f1-score   support
+
+ Control (0)       0.62      0.65      0.64        84
+    Case (1)       0.66      0.62      0.64        90
+
+    accuracy                           0.64       174
+   macro avg       0.64      0.64      0.64       174
+weighted avg       0.64      0.64      0.64       174
+
+  Odds Ratio Analysis:
+    Top 20% vs Rest — Odds Ratio: 4.714 (top: 34 mẫu, TD=27, TE=7)
+    Top 10% vs Rest — Odds Ratio: 17.946 (top: 17 mẫu, TD=16, TE=1)
+
+✅ Hoàn tất!
